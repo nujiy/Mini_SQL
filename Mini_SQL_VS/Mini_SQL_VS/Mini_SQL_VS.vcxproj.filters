@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Document">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source\API">
+      <UniqueIdentifier>{7353b751-f5eb-4054-86bd-51e20fdb371c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\B+Tree">
+      <UniqueIdentifier>{128c70b3-31b6-4a2e-8b49-c85ae420fa77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Buffer">
+      <UniqueIdentifier>{685e2137-99b8-4360-98ed-e263d47b1a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Check">
+      <UniqueIdentifier>{6c8994bd-9f22-4930-9483-da1e39e24310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Error">
+      <UniqueIdentifier>{f4815355-5cfb-49d9-b8c9-48ba373ef968}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Global">
+      <UniqueIdentifier>{50297112-ab83-434f-8430-a2a4606cd94a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Interpreter">
+      <UniqueIdentifier>{e1236f7c-721a-404a-98a6-cf2e0ae645e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Record">
+      <UniqueIdentifier>{322c2210-1953-4f29-b489-0cb362f9a7c1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="API.h">
+      <Filter>Source\API</Filter>
+    </ClInclude>
+    <ClInclude Include="B+Tree.h">
+      <Filter>Source\B+Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.h">
+      <Filter>Source\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Check.h">
+      <Filter>Source\Check</Filter>
+    </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>Source\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Source\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Interpreter.h">
+      <Filter>Source\Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="Record.h">
+      <Filter>Source\Record</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Mini_SQL_VS.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="API.cpp">
+      <Filter>Source\API</Filter>
+    </ClCompile>
+    <ClCompile Include="B+Tree.cpp">
+      <Filter>Source\B+Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>Source\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Check.cpp">
+      <Filter>Source\Check</Filter>
+    </ClCompile>
+    <ClCompile Include="Error.cpp">
+      <Filter>Source\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>Source\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Interpreter.cpp">
+      <Filter>Source\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="Record.cpp">
+      <Filter>Source\Record</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Filter>Document</Filter>
+    </None>
+  </ItemGroup>
+</Project>
