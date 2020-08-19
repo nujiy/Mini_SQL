@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <random>
 #include <ctime>
+//#include <windows.h>
+#include "Color.h"
 #include "Interpreter.h"
 
 void Help();
@@ -9,7 +11,7 @@ void RunMiniSQL();
 void MySleep(unsigned int n = 1); // 程序睡眠
 void IsPod(); // 判断POD数据
 std::string GetCommand(); // 读取用户的输入，以 ";"结束
-const std::string PROMPT = "MiniSQL:";
+const std::string PROMPT = "Mini_SQL>>>";
 void TestFunc();
 int main()
 {
@@ -29,21 +31,17 @@ int main()
 
 void InitMiniSQL()
 {
-	std::cout << R"(                   WELCOME TO USE MY MINISQL!                       )" << std::endl;
+	std::cout << R"(                    WELCOME TO USE MINISQL!                         )" << std::endl;
 	std::cout << R"(+------------------------------------------------------------------+)" << std::endl;
 	std::cout << R"(|Declare: It is just a test version without any error process.     |)" << std::endl;
 	std::cout << R"(|         So you should use it take care.                          |)" << std::endl;
 	std::cout << R"(|                                                                  |)" << std::endl;
 	std::cout << R"(|Usage  : You can typing the "help;" cammand to get a help.        |)" << std::endl;
-	std::cout << R"(|         More details @ https://github.com/ReFantasy/MiniSQL      |)" << std::endl;
 	std::cout << R"(|                                                                  |)" << std::endl;
 	std::cout << R"(|Contact: ReFantasy.cn                                             |)" << std::endl;
 	std::cout << R"(|                                                                  |)" << std::endl;
-	std::cout << R"(|Version: Beta 1.0                                                 |)" << std::endl;
-	std::cout << R"(|                                                                  |)" << std::endl;
-	std::cout << R"(|Copyright(c) by TDL/ReFantasy.All rights reserved.                |)" << std::endl;
+	std::cout << R"(|Version: 1.0                                                      |)" << std::endl;
 	std::cout << R"(+------------------------------------------------------------------+)" << std::endl;
-
 }
 
 
@@ -91,7 +89,7 @@ void IsPod()
 
 void Help()
 {
-	std::cout << R"(+------------------------------------------------------------------------------------------------+)" << std::endl;
+	std::cout << BOLDCYAN << R"(+------------------------------------------------------------------------------------------------+)" << std::endl;
 	std::cout << R"(|A simple example to create a student databae named STU                                          |)" << std::endl;
 	std::cout << R"(+------------------------------------------------------------------------------------------------+)" << std::endl;
 	std::cout << R"(|Create database  : create database STU;                                                         |)" << std::endl;
@@ -109,7 +107,7 @@ void Help()
 	std::cout << R"(|Quit             : quit;                                                                        |)" << std::endl;
 	std::cout << R"(+------------------------------------------------------------------------------------------------+)" << std::endl;
 	std::cout << R"(|Note             : Anytime you want to end MiniSQL use "quit;" command please.                  |)" << std::endl;
-	std::cout << R"(+------------------------------------------------------------------------------------------------+)" << std::endl;
+	std::cout << R"(+------------------------------------------------------------------------------------------------+)" << std::endl << RESET;
 }
 
 std::string GetCommand()
@@ -122,7 +120,7 @@ std::string GetCommand()
 			std::cout << PROMPT;
 		}
 		else {
-			std::cout << "        ";
+			std::cout << YELLOW << "        >>>" << RESET;
 		}
 		n++;
 		getline(std::cin, tmp);

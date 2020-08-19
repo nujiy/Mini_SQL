@@ -1,4 +1,5 @@
 #include "Error.h"
+#include "Color.h"
 #include <vector>
 
 namespace SQLError
@@ -8,7 +9,7 @@ namespace SQLError
 	void BaseError::PrintError() const
 	{
 		// 输出异常
-		std::cout << ErrorInfo;
+		std::cout << RED << ErrorInfo << RESET;
 	}
 
 	void BaseError::WriteToLog()const
@@ -28,11 +29,11 @@ namespace SQLError
 	void CMD_FORMAT_ERROR::PrintError() const
 	{
 		// 输出异常
-		std::cout << error_info << ErrorInfo;
+		std::cout << RED << error_info << ErrorInfo << RESET;
 	}
 	void SQLError::TABLE_ERROR::PrintError() const
 	{
-		std::cout << error_info << ErrorInfo;
+		std::cout << RED << error_info << ErrorInfo<< RESET;
 	}
 
 }

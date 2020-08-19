@@ -155,6 +155,7 @@
     <ClInclude Include="B+Tree.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="Check.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Interpreter.h" />
@@ -172,6 +173,8 @@
     <ClCompile Include="Record.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Docunment\DevelopDoc.md" />
+    <None Include="..\..\Docunment\UserGuide.md" />
     <None Include="..\..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

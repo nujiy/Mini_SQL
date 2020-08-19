@@ -412,7 +412,7 @@ CmdType GetOpType(std::vector<std::string> sen_str)
 		return CmdType::TABLE_SELECT;
 	}
 
-	if (sen_str[0] == "quit")
+	if (sen_str[0] == "quit" || sen_str[0] == "exit")
 	{
 		return CmdType::QUIT;
 	}
