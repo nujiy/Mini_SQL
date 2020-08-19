@@ -64,9 +64,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Mini_SQL_VS.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="API.cpp">
       <Filter>Source\API</Filter>
     </ClCompile>
@@ -90,6 +87,9 @@
     </ClCompile>
     <ClCompile Include="Record.cpp">
       <Filter>Source\Record</Filter>
+    </ClCompile>
+    <ClCompile Include="Mini_SQL_VS_main.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

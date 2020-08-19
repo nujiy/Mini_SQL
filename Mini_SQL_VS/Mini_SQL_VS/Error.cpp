@@ -12,10 +12,10 @@ namespace SQLError
 		std::cout << RED << ErrorInfo << RESET;
 	}
 
-	void BaseError::WriteToLog()const
+	void BaseError::WriteToLog() const
 	{
 		// Ð´ÈëÈÕÖ¾
-		log_file.open("log", std::ios::out | std::ios::app);
+		log_file.open("log.txt", std::ios::out | std::ios::app);
 		log_file << ErrorInfo << std::endl;
 		log_file.close();
 	}

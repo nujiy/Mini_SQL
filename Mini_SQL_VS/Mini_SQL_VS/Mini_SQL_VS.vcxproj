@@ -169,7 +169,7 @@
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="Interpreter.cpp" />
-    <ClCompile Include="Mini_SQL_VS.cpp" />
+    <ClCompile Include="Mini_SQL_VS_main.cpp" />
     <ClCompile Include="Record.cpp" />
   </ItemGroup>
   <ItemGroup>
