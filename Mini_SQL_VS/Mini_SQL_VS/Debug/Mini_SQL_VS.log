@@ -1,6 +1,0 @@
-﻿  Buffer.cpp
-  Error.cpp
-  Mini_SQL_VS_main.cpp
-e:\github\mini_sql\mini_sql_vs\mini_sql_vs\mini_sql_vs_main.cpp(149): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
-  正在生成代码...
-  Mini_SQL_VS.vcxproj -> E:\GitHub\Mini_SQL\Mini_SQL_VS\Debug\Mini_SQL_VS.exe
