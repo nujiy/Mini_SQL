@@ -448,14 +448,14 @@ bool InsertRecord(TB_Insert_Info tb_insert_info, std::string path /*= std::strin
 		auto is_fd = tree.Search(key_tmp);
 		if (is_fd != FileAddr{ 0,0 })
 		{
-			SQLError::KEY_INSERT_ERROR e;
+			SQL_Error::KEY_INSERT_ERROR e;
 			throw e;
 		}
 
 	}
-	catch (const SQLError::BaseError e)
+	catch (const SQL_Error::BaseError e)
 	{
-		SQLError::DispatchError(e);
+		SQL_Error::DispatchError(e);
 		return false;
 	}
 

@@ -39,10 +39,10 @@ void Interpreter(std::vector<std::string> sen_str, CmdType cmd_type, PrintWindow
 *                 串,标识符主要有逗号、括号、比较运算符、分号等。标识符也算作
 *                 有意字串
 ************************************************************************/
-class SensefulStr
+class Meaning_String
 {
 public:
-	SensefulStr(std::string srcstr = "");
+	Meaning_String(std::string srcstr = "");
 	void SetSrcStr(std::string _srcstr);
 
 	std::vector<std::string> GetSensefulStr()const;

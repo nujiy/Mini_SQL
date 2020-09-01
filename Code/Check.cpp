@@ -7,7 +7,7 @@ void Check_TB_Create_Info(const TB_Create_Info &tb_create_info)
 	std::string idx_file = GetCp().GetCurrentPath() + table_name + ".idx";
 	// 判断表是否已经存在
 	if (_access(idx_file.c_str(), 0) != -1) {  //表存在
-		throw SQLError::TABLE_ERROR("The table already exists!");
+		throw SQL_Error::TABLE_ERROR("The table already exists!");
 	}
 
 	// 检查每个字段的信息
@@ -17,11 +17,11 @@ void Check_TB_Create_Info(const TB_Create_Info &tb_create_info)
 
 		// 检查字段名称长度
 		if (column.name.size() >= ColumnNameLength)
-			throw SQLError::TABLE_ERROR("Error!Column name length overflow");
+			throw SQL_Error::TABLE_ERROR("Error!Column name length overflow");
 
 		// 检查字段类型
 		if (column.type != Column_Type::C && column.type != Column_Type::D&& column.type != Column_Type::I)
-			throw SQLError::TABLE_ERROR("Column data type error!");
+			throw SQL_Error::TABLE_ERROR("Column data type error!");
 	}
 
 	// 检查是否多个关键字
@@ -30,12 +30,12 @@ void Check_TB_Create_Info(const TB_Create_Info &tb_create_info)
 		if (e.isPrimary) primary_count++;
 
 	if (primary_count > 1)
-		throw SQLError::TABLE_ERROR("Error!More than one primary key!");
+		throw SQL_Error::TABLE_ERROR("Error!More than one primary key!");
 
 
 	// 检查字段个数
 	if (tb_create_info.columns_info.size() > RecordColumnCount)
-		throw SQLError::TABLE_ERROR("Error!Column count is overflow!");
+		throw SQL_Error::TABLE_ERROR("Error!Column count is overflow!");
 }
 
 void Check_TB_Insert_Info(const TB_Insert_Info &tb_insert_info)
@@ -44,11 +44,11 @@ void Check_TB_Insert_Info(const TB_Insert_Info &tb_insert_info)
 
 	// 如果不在具体数据库目录下，则不能插入记录
 	if (!GetCp().GetIsInSpeDb())
-		throw SQLError::TABLE_ERROR("Error!Not use database!");
+		throw SQL_Error::TABLE_ERROR("Error!Not use database!");
 
 	// 判断表是否已经存在
 	if (_access(idx_file.c_str(), 0) == -1) {  //表不存在
-		throw SQLError::TABLE_ERROR("The table is not exists!");
+		throw SQL_Error::TABLE_ERROR("The table is not exists!");
 	}
 
 	BTree tree(idx_file);
@@ -60,20 +60,20 @@ void Check_TB_Insert_Info(const TB_Insert_Info &tb_insert_info)
 		auto &cur_columu = tb_insert_info.insert_info[i];
 		// 判断字段是否合法
 		if (!table_index_head_info.IsColumnName(cur_columu.column_name))
-			throw SQLError::TABLE_ERROR("Fields do not exist!");
+			throw SQL_Error::TABLE_ERROR("Fields do not exist!");
 
 		// 检擦字段大小
 		int index = table_index_head_info.GetIndex(cur_columu.column_name);
 		Column_Type column_type = table_index_head_info.GetColumnType(cur_columu.column_name);
 		int column_size = table_index_head_info.GetColumnSizeByIndex(index);
 		if (column_type == Column_Type::C && cur_columu.column_value.size() > column_size)
-			throw SQLError::TABLE_ERROR("Field length overflow!");
+			throw SQL_Error::TABLE_ERROR("Field length overflow!");
 
 		// 如果是主键且是字符串字段
 		if (table_index_head_info.IsPrimary(cur_columu.column_name))
 		{
 			if (column_type == Column_Type::C && (cur_columu.column_value.size() > column_size) || cur_columu.column_value.size() > ColumnNameLength)
-				throw SQLError::TABLE_ERROR("Primary key field length overflow!");
+				throw SQL_Error::TABLE_ERROR("Primary key field length overflow!");
 		}
 
 
@@ -86,11 +86,11 @@ void Check_TB_Update_Info(const TB_Update_Info &tb_update_info)
 
 	// 如果不在具体数据库目录下，则不能插入记录
 	if (!GetCp().GetIsInSpeDb())
-		throw SQLError::TABLE_ERROR("Error!Not use database!");
+		throw SQL_Error::TABLE_ERROR("Error!Not use database!");
 
 	// 判断表是否已经存在
 	if (_access(idx_file.c_str(), 0) == -1) {  //表不存在
-		throw SQLError::TABLE_ERROR("The table is not exists!");
+		throw SQL_Error::TABLE_ERROR("The table is not exists!");
 	}
 
 	BTree tree(idx_file);
@@ -102,20 +102,20 @@ void Check_TB_Update_Info(const TB_Update_Info &tb_update_info)
 		auto &new_value = tb_update_info.field_value[j];
 		// 检查字段名称
 		if (!table_index_head_info.IsColumnName(new_value.field))
-			throw SQLError::TABLE_ERROR("Fields do not exist!");
+			throw SQL_Error::TABLE_ERROR("Fields do not exist!");
 
 		// 检擦字段大小
 		int index = table_index_head_info.GetIndex(new_value.field);
 		Column_Type column_type = table_index_head_info.GetColumnType(new_value.field);
 		int column_size = table_index_head_info.GetColumnSizeByIndex(index);
 		if (column_type == Column_Type::C && new_value.field.size() > column_size)
-			throw SQLError::TABLE_ERROR("Field length overflow!");
+			throw SQL_Error::TABLE_ERROR("Field length overflow!");
 
 		// 如果是主键且是字符串字段
 		if (table_index_head_info.IsPrimary(new_value.field))
 		{
 			if (column_type == Column_Type::C && (new_value.field.size() > column_size) || new_value.field.size() > ColumnNameLength)
-				throw SQLError::TABLE_ERROR("Primary key field length overflow!");
+				throw SQL_Error::TABLE_ERROR("Primary key field length overflow!");
 		}
 	}
 
@@ -125,9 +125,9 @@ void Check_TB_Update_Info(const TB_Update_Info &tb_update_info)
 		auto &expr_tmp = tb_update_info.expr[j];
 		// 检查字段名称
 		if (!table_index_head_info.IsColumnName(expr_tmp.field))
-			throw SQLError::TABLE_ERROR("Where Expr Fields do not exist!");
+			throw SQL_Error::TABLE_ERROR("Where Expr Fields do not exist!");
 		if (expr_tmp.op != ">"&& expr_tmp.op != "=" && expr_tmp.op != "<" && expr_tmp.op != ">=" && expr_tmp.op != "<=" && expr_tmp.op != "!=")
-			throw SQLError::TABLE_ERROR("Where Expr relational operator error!");
+			throw SQL_Error::TABLE_ERROR("Where Expr relational operator error!");
 
 	}
 }
@@ -140,11 +140,11 @@ void Check_TB_Delete_Info(const TB_Delete_Info &tb_delete_info)
 
 	// 如果不在具体数据库目录下，则不能插入记录
 	if (!GetCp().GetIsInSpeDb())
-		throw SQLError::TABLE_ERROR("Error!Not use database!");
+		throw SQL_Error::TABLE_ERROR("Error!Not use database!");
 
 	// 判断表是否已经存在
 	if (_access(idx_file.c_str(), 0) == -1) {  //表不存在
-		throw SQLError::TABLE_ERROR("The table is not exists!");
+		throw SQL_Error::TABLE_ERROR("The table is not exists!");
 	}
 
 	// 检查删除条件
@@ -153,9 +153,9 @@ void Check_TB_Delete_Info(const TB_Delete_Info &tb_delete_info)
 		auto &expr_tmp = tb_delete_info.expr[j];
 		// 检查字段名称
 		if (!table_index_head_info.IsColumnName(expr_tmp.field))
-			throw SQLError::TABLE_ERROR("Where Expr Fields do not exist!");
+			throw SQL_Error::TABLE_ERROR("Where Expr Fields do not exist!");
 		if (expr_tmp.op != ">" && expr_tmp.op != "=" && expr_tmp.op != "<" && expr_tmp.op != ">=" && expr_tmp.op != "<=" && expr_tmp.op != "!=")
-			throw SQLError::TABLE_ERROR("Where Expr relational operator error!");
+			throw SQL_Error::TABLE_ERROR("Where Expr relational operator error!");
 	}
 }
 
@@ -167,10 +167,10 @@ void Check_TB_Select_Info(const TB_Select_Info &tb_select_info)
 
 	// 如果不在具体数据库目录下，则不能插入记录
 	if (!GetCp().GetIsInSpeDb())
-		throw SQLError::TABLE_ERROR("Error!Not use database!");
+		throw SQL_Error::TABLE_ERROR("Error!Not use database!");
 	// 判断表是否已经存在
 	if (_access(idx_file.c_str(), 0) == -1) {  //表不存在
-		throw SQLError::TABLE_ERROR("The table is not exists!");
+		throw SQL_Error::TABLE_ERROR("The table is not exists!");
 	}
 	// 检查要显示的字段名字
 	if (tb_select_info.name_selected_column.size() == 1 && tb_select_info.name_selected_column[0] == "*")
@@ -183,7 +183,7 @@ void Check_TB_Select_Info(const TB_Select_Info &tb_select_info)
 		{
 			std::string name = tb_select_info.name_selected_column[j];
 			if (!table_index_head_info.IsColumnName(name))
-				throw SQLError::TABLE_ERROR("Selected fields do not exist!");
+				throw SQL_Error::TABLE_ERROR("Selected fields do not exist!");
 		}
 	}
 
@@ -193,16 +193,16 @@ void Check_TB_Select_Info(const TB_Select_Info &tb_select_info)
 	{
 		auto &cmp = tb_select_info.vec_cmp_cell[j];
 		if (!table_index_head_info.IsColumnName(cmp.cmp_value.columu_name))
-			throw SQLError::TABLE_ERROR("Where Expr Fields do not exist!");
+			throw SQL_Error::TABLE_ERROR("Where Expr Fields do not exist!");
 		if (table_index_head_info.GetColumnType(cmp.cmp_value.columu_name) != cmp.cmp_value.column_type)
-			throw SQLError::TABLE_ERROR("Where Expr Fields type error!");
+			throw SQL_Error::TABLE_ERROR("Where Expr Fields type error!");
 		if (cmp.OperType != Operator_Type::B
 			&& cmp.OperType != Operator_Type::BE
 			&& cmp.OperType != Operator_Type::E
 			&& cmp.OperType != Operator_Type::L
 			&& cmp.OperType != Operator_Type::LE
 			&& cmp.OperType != Operator_Type::NE)
-			throw SQLError::TABLE_ERROR("Where Expr relational operator error!");
+			throw SQL_Error::TABLE_ERROR("Where Expr relational operator error!");
 
 	}
 }

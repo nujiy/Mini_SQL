@@ -60,7 +60,7 @@ e:\github\mini_sql\code\interpreter.cpp(831): warning C4018: “>”: 有符号/
 e:\github\mini_sql\code\interpreter.cpp(920): warning C4018: “<”: 有符号/无符号不匹配
 e:\github\mini_sql\code\interpreter.cpp(979): warning C4018: “<”: 有符号/无符号不匹配
   Main.cpp
-e:\github\mini_sql\code\main.cpp(149): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+e:\github\mini_sql\code\main.cpp(42): warning C4129: “;”: 不可识别的字符转义序列
   Record.cpp
   正在生成代码...
   Mini_SQL_VS.vcxproj -> E:\GitHub\Mini_SQL\Mini_SQL_VS\Debug\Mini_SQL_VS.exe

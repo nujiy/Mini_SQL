@@ -1,4 +1,7 @@
+//用来定义输出颜色的宏
+
 #pragma once
+
 #define RESET   "\033[0m"
 #define BLACK   "\033[30m"      /* Black */
 #define RED     "\033[31m"      /* Red */

@@ -233,7 +233,7 @@ Column_Cell::operator KeyAttr() const
 		key_attr.type = column_type;
 		if (strlen(column_value.StrValue) > ColumnNameLength)
 		{
-			throw SQLError::KeyAttr_NameLength_ERROR();
+			throw SQL_Error::KeyAttr_NameLength_ERROR();
 		}
 		else
 		{

@@ -2,55 +2,55 @@
 #include <random>
 #include <ctime>
 //#include <windows.h>
+
 #include "Color.h"
 #include "Interpreter.h"
+using namespace std;
+
 
 void Help();
 void InitMiniSQL();
 void RunMiniSQL();
-void MySleep(unsigned int n = 1); // 程序睡眠
-void IsPod(); // 判断POD数据
-std::string GetCommand(); // 读取用户的输入，以 ";"结束
-const std::string PROMPT = "Mini_SQL>>>";
-void TestFunc();
+void sleep_(unsigned int n = 1); // Sleep
+void IsPod(); // 判断?POD
+string GetCommand(); // get 输入;前的命令
+const string PROMPT = "Mini_SQL>>>";
+//void TestFunc();
+
+
 int main()
 {
-	// Initialize DB
+	// Initialize
 	InitMiniSQL();
 
-	// Run DB
+	// Run
 	RunMiniSQL();
 
-	// Exit DB
-	std::cout << "bye." << std::endl;
+	// Exit
+	cout << "Bye." << endl;
 
-	MySleep();
+	sleep_();
 
 	return 0;
 }
 
+
 void InitMiniSQL()
 {
-	std::cout << R"(                      WELCOME TO MINISQL!                           )" << std::endl;
-	std::cout << R"(+------------------------------------------------------------------+)" << std::endl;
-	std::cout << R"(|Declare: It is just a test version without any error process.     |)" << std::endl;
-	std::cout << R"(|         So you should use it take care.                          |)" << std::endl;
-	std::cout << R"(|                                                                  |)" << std::endl;
-	std::cout << R"(|Usage  : You can typing the "help;" cammand to get a help.        |)" << std::endl;
-	std::cout << R"(|                                                                  |)" << std::endl;
-	std::cout << R"(|Contact: ReFantasy.cn                                             |)" << std::endl;
-	std::cout << R"(|                                                                  |)" << std::endl;
-	std::cout << R"(|Version: 1.0.1                                                    |)" << std::endl;
-	std::cout << R"(+------------------------------------------------------------------+)" << std::endl;
+	cout << "(                      WELCOME TO MINI_SQL!                          )" << endl;
+	cout << "(+------------------------------------------------------------------+)" << endl;
+	cout << "(|You can typing the \"help\;\" cammand to get help.                   |)" << endl;
+	cout << "(|                                                                  |)" << endl;
+	cout << "(|You can enter \"exit\" OR \"quit\" to exit this program               |)" << endl;
+	cout << "(+------------------------------------------------------------------+)" << endl;
 }
 
 
 void RunMiniSQL()
 {
-	SensefulStr senstr;
+	Meaning_String senstr;
 	PrintWindow print_window;
-	while (true)
-	{
+	while (1)
 		try
 		{
 			std::string cmd = GetCommand();
@@ -66,14 +66,17 @@ void RunMiniSQL()
 
 			Interpreter(senstr.GetSensefulStr(), cmd_type, print_window);
 		}
-		catch (SQLError::BaseError &e)
+		catch (SQL_Error::BaseError &e)
 		{
-			SQLError::DispatchError(e);
-			std::cout << std::endl;
+			SQL_Error::DispatchError(e);
+			cout << endl;
 			continue;
 		}
-
-	}
+		catch (...)
+		{
+			
+		}
+	
 }
 
 void IsPod()
@@ -89,41 +92,39 @@ void IsPod()
 
 void Help()
 {
-	std::cout << BOLDCYAN << R"(+------------------------------------------------------------------------------------------------+)" << std::endl;
-	std::cout << R"(|A simple example to create a student databae named COLLEGE                                      |)" << std::endl;
-	std::cout << R"(+------------------------------------------------------------------------------------------------+)" << std::endl;
-	std::cout << R"(|Create database  : create database COLLEGE;                                                     |)" << std::endl;
-	std::cout << R"(|Use database     : use database COLLEGE;                                                        |)" << std::endl;
-	std::cout << R"(|Show database    : show databases;                                                              |)" << std::endl;
-	std::cout << R"(|Create Table     : create table instructor(ID int primary, Salary double, Name char(20));       |)" << std::endl;
-	std::cout << R"(|Insert Record(1) : insert into instructor(id,Salary,name)values(1,10000.0,ZhangSan);            |)" << std::endl;
-	std::cout << R"(|Insert Record(2) : insert into instructor(id,name)values(2,LiSi);     #LiSi has no Salary now   |)" << std::endl;
-	std::cout << R"(|UPDATE Table     : update instructor set Salary = 100.0 where name = LiSi;                      |)" << std::endl;
-	std::cout << R"(|Delete Table     : delete from instructor where ID = 1;               #ZhangSan is deleted      |)" << std::endl;
-	std::cout << R"(|Select Table(1)  : select * from instructor where ID = 2;                                       |)" << std::endl;
-	std::cout << R"(|Select Table(2)  : select * from instructor where ID > 1 and Salary < 2000;                     |)" << std::endl;
-	std::cout << R"(|Select Table(3)  : select ID,Salary from instructor where id > 1 and Salary < 2000.5;           |)" << std::endl;
-	std::cout << R"(|Drop database    : drop database COLLEGE;                                                       |)" << std::endl;
-	std::cout << R"(|Quit             : quit;  OR  exit;                                                             |)" << std::endl;
-	std::cout << R"(+------------------------------------------------------------------------------------------------+)" << std::endl;
-	std::cout << R"(|Note             : Anytime you want to end MiniSQL use "quit;" command please.                  |)" << std::endl;
-	std::cout << R"(+------------------------------------------------------------------------------------------------+)" << std::endl << RESET;
+	cout << BOLDCYAN <<R"(|                                           HELP                                                 |)" << endl;
+	cout << "(+------------------------------------------------------------------------------------------------+)" << endl;
+	cout << "(|A simple example to create a student databae named COLLEGE                                      |)" << endl;
+	cout << "(+------------------------------------------------------------------------------------------------+)" << endl;
+	cout << "(|Create database  : create database COLLEGE;                                                     |)" << endl;
+	cout << "(|Use database     : use database COLLEGE;                                                        |)" << endl;
+	cout << "(|Show database    : show databases;                                                              |)" << endl;
+	cout << "(|Create Table     : create table instructor(ID int primary, Salary double, Name char(20));       |)" << endl;
+	cout << "(|Insert Record(1) : insert into instructor(id,Salary,name)values(1,10000.0,ZhangSan);            |)" << endl;
+	cout << "(|Insert Record(2) : insert into instructor(id,name)values(2,LiSi);     #LiSi has no Salary now   |)" << endl;
+	cout << "(|UPDATE Table     : update instructor set Salary = 100.0 where name = LiSi;                      |)" << endl;
+	cout << "(|Delete Table     : delete from instructor where ID = 1;               #ZhangSan is deleted      |)" << endl;
+	cout << "(|Select Table(1)  : select * from instructor where ID = 2;                                       |)" << endl;
+	cout << "(|Select Table(2)  : select * from instructor where ID > 1 and Salary < 2000;                     |)" << endl;
+	cout << "(|Select Table(3)  : select ID,Salary from instructor where id > 1 and Salary < 2000.5;           |)" << endl;
+	cout << "(|Drop database    : drop database COLLEGE;                                                       |)" << endl;
+	cout << "(|Quit             : quit;  OR  exit;                                                             |)" << endl;
+	cout << "(+------------------------------------------------------------------------------------------------+)" << endl;
+	cout << "(|Anytime you want to end MiniSQL use \"quit;\" command please.                                     |)" << endl;
+	cout << "(+------------------------------------------------------------------------------------------------+)" << endl << RESET;
 }
 
 std::string GetCommand()
 {
-	std::string res;
-	std::string tmp;
-	int n = 0;
+	string res, tmp;
+	int i = 0;
 	do {
-		if (n == 0) {
+		if (i == 0) 
 			std::cout << PROMPT;
-		}
-		else {
+		else 
 			std::cout << YELLOW << "        >>>" << RESET;
-		}
-		n++;
-		getline(std::cin, tmp);
+		i += 1;
+		getline(cin, tmp);
 		res += tmp;
 		if (tmp[tmp.size() - 1] != ';')
 			res += " ";
@@ -131,20 +132,19 @@ std::string GetCommand()
 	return res;
 }
 
-void MySleep(unsigned int n)
+void sleep_(unsigned int n)
 {
-	auto t1 = time(0);
-	time_t t2 = t1;
-	while ((t2 - t1) < n)
-	{
-		t2 = time(0);
-	}
+	auto t_1 = time(0);
+	auto t_2 = t_1;
+	while ((t_2 - t_1) < n)
+		t_2 = time(0);
+	return;
 }
 
-
+/*
 void TestFunc()
 {
-	SensefulStr senstr;
+	Meaning_String senstr;
 	PrintWindow print_window;
 	std::default_random_engine e(time(NULL));
 	std::uniform_real_distribution<double> d(0, 1000);
@@ -205,4 +205,4 @@ void TestFunc()
 	}
 	out.close();
 }
-
+*/

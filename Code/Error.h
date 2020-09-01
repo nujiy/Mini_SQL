@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-namespace SQLError
+namespace SQL_Error
 {
 	/************************************************************************
 	*
@@ -21,7 +21,7 @@ namespace SQLError
 
 	};
 	// ´íÎó´¦Àíº¯Êý
-	void DispatchError(const SQLError::BaseError &error);
+	void DispatchError(const SQL_Error::BaseError &error);
 
 
 	/************************************************************************

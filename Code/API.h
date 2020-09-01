@@ -1,13 +1,15 @@
 #ifndef __MiniSql_H__
 #define __MiniSql_H__
+
 #include <algorithm>
+#include <vector>
 #include "Global.h"
 #include "B+Tree.h"
 #include "Record.h"
 #include "Check.h"
+using namespace std;
 
-
-// 记录查找关系符
+//关系查找符
 enum Operator_Type { B, BE, L, LE, E, NE };
 Operator_Type GetOperatorType(std::string s);
 
@@ -121,7 +123,8 @@ struct TB_Update_Info
 ************************************************************************/
 struct TB_Delete_Info
 {
-	using Expr = struct {
+	using Expr = struct 
+	{
 		std::string field;
 		std::string op;
 		std::string value;
@@ -220,4 +223,4 @@ private:
 };
 
 
-#endif //__MiniSql_H__
+#endif

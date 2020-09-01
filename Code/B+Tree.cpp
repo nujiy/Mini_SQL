@@ -317,11 +317,11 @@ bool BTree::Insert(KeyAttr k, FileAddr k_fd)
 	{
 		auto key_fd = Search(k);
 		if (key_fd != FileAddr{ 0,0 })
-			throw SQLError::KEY_INSERT_ERROR();
+			throw SQL_Error::KEY_INSERT_ERROR();
 	}
-	catch (const SQLError::BaseError &error)
+	catch (const SQL_Error::BaseError &error)
 	{
-		SQLError::DispatchError(error);
+		SQL_Error::DispatchError(error);
 		std::cout << std::endl;
 		return false;
 	}

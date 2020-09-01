@@ -1,0 +1,68 @@
+﻿  API.cpp
+e:\github\mini_sql\code\api.cpp(179): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(195): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(341): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(372): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(403): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(513): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(554): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(566): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(588): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(595): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(624): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(649): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+e:\github\mini_sql\code\api.cpp(672): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(683): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(705): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(885): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(895): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(1168): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\api.cpp(1238): warning C4018: “<”: 有符号/无符号不匹配
+  B+Tree.cpp
+  Buffer.cpp
+  Check.cpp
+e:\github\mini_sql\code\check.cpp(14): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\check.cpp(58): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\check.cpp(69): warning C4018: “>”: 有符号/无符号不匹配
+e:\github\mini_sql\code\check.cpp(75): warning C4018: “>”: 有符号/无符号不匹配
+e:\github\mini_sql\code\check.cpp(100): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\check.cpp(111): warning C4018: “>”: 有符号/无符号不匹配
+e:\github\mini_sql\code\check.cpp(117): warning C4018: “>”: 有符号/无符号不匹配
+e:\github\mini_sql\code\check.cpp(123): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\check.cpp(151): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\check.cpp(182): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\check.cpp(192): warning C4018: “<”: 有符号/无符号不匹配
+  Error.cpp
+  Global.cpp
+e:\github\mini_sql\code\global.cpp(38): warning C4018: “<”: 有符号/无符号不匹配
+  Interpreter.cpp
+e:\github\mini_sql\code\interpreter.cpp(65): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(80): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(85): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(90): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(98): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(119): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(144): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(162): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(258): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(266): warning C4018: “>=”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(283): warning C4018: “>=”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(294): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(321): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(337): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(632): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(658): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(673): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(684): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(819): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(827): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(831): warning C4018: “>”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(920): warning C4018: “<”: 有符号/无符号不匹配
+e:\github\mini_sql\code\interpreter.cpp(979): warning C4018: “<”: 有符号/无符号不匹配
+  Main.cpp
+e:\github\mini_sql\code\main.cpp(145): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  Record.cpp
+  正在生成代码
+  All 1651 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  已完成代码的生成
+  Mini_SQL_VS.vcxproj -> E:\GitHub\Mini_SQL\Mini_SQL_VS\Release\Mini_SQL_VS.exe

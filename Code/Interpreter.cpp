@@ -8,7 +8,7 @@ std::string CreateDbInfo(std::vector<std::string> sen_str)
 		|| (StrToLower(sen_str[0]) != "create")
 		|| (StrToLower(sen_str[1]) != "database")
 		)
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 	return sen_str[2];
 }
 
@@ -18,7 +18,7 @@ std::string DeleteDbInfo(std::vector<std::string> sen_str)
 		|| (StrToLower(sen_str[0]) != "drop")
 		|| (StrToLower(sen_str[1]) != "database")
 		)
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 	return sen_str[2];
 }
 
@@ -28,7 +28,7 @@ std::string UseDbInfo(std::vector<std::string> sen_str)
 		|| (StrToLower(sen_str[0]) != "use")
 		|| (StrToLower(sen_str[1]) != "database")
 		)
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 	return sen_str[2];
 }
 
@@ -40,7 +40,7 @@ std::string ShowDbInfo(std::vector<std::string> sen_str)
 		|| (StrToLower(sen_str[0]) != "show")
 		|| (StrToLower(sen_str[1]) != "databases")
 		)
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 	return std::string();
 }
 
@@ -50,7 +50,7 @@ std::string DropTableInfo(std::vector<std::string> sen_str)
 		|| (StrToLower(sen_str[0]) != "drop")
 		|| (StrToLower(sen_str[1]) != "table")
 		)
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 	return sen_str[2];
 }
 
@@ -59,7 +59,7 @@ TB_Select_Info TableSelectInfo(std::vector<std::string> sen_str)
 	TB_Select_Info tb_select_info;
 	// 选择的字段名称
 	if (StrToLower(sen_str[0]) != "select")
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 	int name_L_index = 1;
 	int name_R_index = 0;
 	for (int i = 0; i < sen_str.size(); i++)
@@ -71,14 +71,14 @@ TB_Select_Info TableSelectInfo(std::vector<std::string> sen_str)
 		}
 	}
 	if (!name_R_index)
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 	for (int i = name_L_index; i <= name_R_index; i++)
 	{
 		tb_select_info.name_selected_column.push_back(sen_str[i]);
 	}
 
 	if (sen_str.size() - 1 < (name_R_index + 2))
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 	tb_select_info.table_name = sen_str[name_R_index + 2];
 
 	int name_where_index = name_R_index + 3;
@@ -194,7 +194,7 @@ TB_Create_Info CreateTableInfo(std::vector<std::string> sen_str)
 	tb_create_info.table_name = sen_str[2];
 
 	if (sen_str[3] != "(")
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 
 	int i = 4;
 	while (i < sen_str.size())
@@ -202,7 +202,7 @@ TB_Create_Info CreateTableInfo(std::vector<std::string> sen_str)
 		if (sen_str[i] == ";")
 			break;
 		if(i+1>=sen_str.size())
-			throw SQLError::CMD_FORMAT_ERROR();
+			throw SQL_Error::CMD_FORMAT_ERROR();
 
 		TB_Create_Info::ColumnInfo colmu_info;
 		colmu_info.name = sen_str[i];
@@ -226,7 +226,7 @@ TB_Create_Info CreateTableInfo(std::vector<std::string> sen_str)
 		{
 			colmu_info.length = StrToInt(sen_str[i + 3]);
 			if (sen_str[i + 4] != ")")
-				throw SQLError::CMD_FORMAT_ERROR();
+				throw SQL_Error::CMD_FORMAT_ERROR();
 			if (sen_str[i + 5] == "primary")
 			{
 				colmu_info.isPrimary = true;
@@ -249,7 +249,7 @@ TB_Create_Info CreateTableInfo(std::vector<std::string> sen_str)
 	}*/
 
 	if (sen_str.size() < 3 || StrToLower(sen_str[0]) != "create" || StrToLower(sen_str[1]) != "table")
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 	// 表名
 	tb_create_info.table_name = sen_str[2];
 
@@ -263,7 +263,7 @@ TB_Create_Info CreateTableInfo(std::vector<std::string> sen_str)
 		column_info.name = sen_str[j];
 
 		// 列类型
-		if (j + 1 >= sen_str.size()) throw SQLError::CMD_FORMAT_ERROR();
+		if (j + 1 >= sen_str.size()) throw SQL_Error::CMD_FORMAT_ERROR();
 
 		if (StrToLower(sen_str[j + 1]) == "int")
 		{
@@ -280,21 +280,21 @@ TB_Create_Info CreateTableInfo(std::vector<std::string> sen_str)
 		else if (StrToLower(sen_str[j + 1]) == "char")
 		{
 			column_info.type = Column_Type::C;
-			if (j + 2 >= sen_str.size())throw SQLError::CMD_FORMAT_ERROR();
+			if (j + 2 >= sen_str.size())throw SQL_Error::CMD_FORMAT_ERROR();
 			column_info.length = stoi(sen_str[j + 2]);
 
 			j += 3;
 		}
 		else
 		{
-			throw SQLError::CMD_FORMAT_ERROR("Unsupported data types!");
+			throw SQL_Error::CMD_FORMAT_ERROR("Unsupported data types!");
 		}
 
 		// 是否主键
 		if (j < sen_str.size() && (sen_str[j] == "primary"))
 		{
 			if (HasPrimary)
-				throw SQLError::CMD_FORMAT_ERROR("Error!More than one primary key!");
+				throw SQL_Error::CMD_FORMAT_ERROR("Error!More than one primary key!");
 			HasPrimary = true;
 			column_info.isPrimary = true;
 			j++;
@@ -315,7 +315,7 @@ TB_Insert_Info CreateInsertInfo(std::vector<std::string> sen_str)
 
 
 	if (sen_str.size() < 3 || StrToLower(sen_str[0]) != "insert" || StrToLower(sen_str[1]) != "into")
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 
 	int values_index = -1;
 	for (int i = 0; i < sen_str.size(); i++)
@@ -327,7 +327,7 @@ TB_Insert_Info CreateInsertInfo(std::vector<std::string> sen_str)
 		}
 	}
 	if (values_index <= 0)
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 
 	// 读取表名
 	tb_insert_info.table_name = sen_str[2];
@@ -339,7 +339,7 @@ TB_Insert_Info CreateInsertInfo(std::vector<std::string> sen_str)
 		tb_insert_info.insert_info.push_back({ sen_str[p],sen_str[q] });
 	}
 	if ((p - 3) != (sen_str.size() - 1 - values_index))
-		throw SQLError::CMD_FORMAT_ERROR("The size of fields is not match the size of values!");
+		throw SQL_Error::CMD_FORMAT_ERROR("The size of fields is not match the size of values!");
 	return tb_insert_info;
 }
 
@@ -421,7 +421,7 @@ CmdType GetOpType(std::vector<std::string> sen_str)
 		return CmdType::HELP;
 	}
 
-	throw SQLError::CMD_FORMAT_ERROR();
+	throw SQL_Error::CMD_FORMAT_ERROR();
 
 }
 
@@ -539,7 +539,7 @@ void PrintWindow::ShowAllTable(std::vector<std::string> sen_str, std::string pat
 
 	if (!GetCp().GetIsInSpeDb() || sen_str.size() < 2)
 	{
-		throw SQLError::CMD_FORMAT_ERROR("Not use database or ");
+		throw SQL_Error::CMD_FORMAT_ERROR("Not use database or ");
 	}
 
 	std::vector<std::string> tables;
@@ -889,30 +889,30 @@ void Interpreter(std::vector<std::string> sen_str, CmdType cmd_type, PrintWindow
 		break;
 
 	default:
-		throw SQLError::CMD_FORMAT_ERROR();
+		throw SQL_Error::CMD_FORMAT_ERROR();
 		break;
 	}
 }
 
-SensefulStr::SensefulStr(std::string srcstr /*= ""*/)
+Meaning_String::Meaning_String(std::string srcstr /*= ""*/)
 	:src_str(srcstr)
 {
 	Parse();
 }
 
-void SensefulStr::SetSrcStr(std::string _srcstr)
+void Meaning_String::SetSrcStr(std::string _srcstr)
 {
 	src_str = _srcstr;
 	sen_str.clear();
 	Parse();
 }
 
-std::vector<std::string> SensefulStr::GetSensefulStr() const
+std::vector<std::string> Meaning_String::GetSensefulStr() const
 {
 	return sen_str;
 }
 
-void SensefulStr::Parse()
+void Meaning_String::Parse()
 {
 	int i = 0;
 	sen_str.clear();
@@ -971,7 +971,7 @@ void SensefulStr::Parse()
 	}
 }
 
-void SensefulStr::Parse2()
+void Meaning_String::Parse2()
 {
 	int i = 0;
 	sen_str.clear();
@@ -1034,7 +1034,7 @@ void SensefulStr::Parse2()
 	std::cout << std::endl;
 }
 
-bool SensefulStr::IsKeyChar(char c)
+bool Meaning_String::IsKeyChar(char c)
 {
 	auto it = std::find(key_char.begin(), key_char.end(), c);
 	return (it != key_char.end());
