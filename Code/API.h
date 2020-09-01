@@ -7,7 +7,6 @@
 #include "B+Tree.h"
 #include "Record.h"
 #include "Check.h"
-using namespace std;
 
 //¹ØÏµ²éÕÒ·û
 enum Operator_Type { B, BE, L, LE, E, NE };
