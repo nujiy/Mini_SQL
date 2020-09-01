@@ -27,7 +27,7 @@ int main()
 	RunMiniSQL();
 
 	// Exit
-	cout << "Bye." << endl;
+	cout << endl << "Bye." << endl;
 
 	sleep_();
 
