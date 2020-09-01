@@ -9,16 +9,16 @@
 #include "Check.h"
 
 //关系查找符
-enum Operator_Type { B, BE, L, LE, E, NE };
-Operator_Type GetOperatorType(std::string s);
+enum Operat_Type { B, BE, L, LE, E, NE };
+Operat_Type GetOperatorType(std::string s);
 
 
 class CompareCell                     //一个字段比较单元
 {
 public:
-	CompareCell(Operator_Type t, Column_Cell cc) :OperType(t), cmp_value(cc) {}
+	CompareCell(Operat_Type t, Column_Cell cc) :OperType(t), cmp_value(cc) {}
 	bool operator()(const Column_Cell &cc);
-	Operator_Type	OperType;	        //比较关系关系运算符
+	Operat_Type	OperType;	        //比较关系关系运算符
 	Column_Cell		cmp_value;
 };
 struct SelectPrintInfo
@@ -188,7 +188,7 @@ std::vector<std::pair<KeyAttr, FileAddr>> RangeSearch(CompareCell compare_cell, 
 
 
 // 比较的字段名称，比较的字段类型，比较关系，比较的值
-CompareCell CreateCmpCell(std::string column_name, Column_Type column_type, Operator_Type Optype, std::string value);
+CompareCell CreateCmpCell(std::string column_name, Column_Type column_type, Operat_Type Optype, std::string value);
 
 // 索引文件头信息管理类
 class TableIndexHeadInfo
