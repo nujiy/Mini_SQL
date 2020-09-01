@@ -244,10 +244,10 @@ void MemPage::Back2File() const
 	{
 		int temp = 0;
 		temp = lseek(this->fileId, this->filePageID*FILE_PAGESIZE, SEEK_SET);
-		if (temp == -1)throw SQL_Error::LSEEK_ERROR();
+		if (temp == -1)throw Error_SQL::LSEEK_ERROR();
 
 		temp = write(this->fileId, this->Ptr2PageBegin, FILE_PAGESIZE); // 写回文件
-		if (temp != FILE_PAGESIZE) throw SQL_Error::WRITE_ERROR();  // 写失败
+		if (temp != FILE_PAGESIZE) throw Error_SQL::WRITE_ERROR();  // 写失败
 		isModified = false;
 		bIsLastUsed = true;
 	}
@@ -342,11 +342,11 @@ MemPage* Clock::LoadFromFile(unsigned long fileId, unsigned long filePageID)
 		assert(fileId > 0);
 		assert(filePageID >= 0);
 		long offset_t = lseek(fileId, filePageID*FILE_PAGESIZE, SEEK_SET);       // 定位到将要取出的文件页的首地址
-		if (offset_t == -1)throw SQL_Error::LSEEK_ERROR();
+		if (offset_t == -1)throw Error_SQL::LSEEK_ERROR();
 		long byte_count = read(fileId, MemPages[freePage]->Ptr2PageBegin, FILE_PAGESIZE);          // 读到内存中
-		if (byte_count == 0)throw SQL_Error::READ_ERROR();
+		if (byte_count == 0)throw Error_SQL::READ_ERROR();
 	}
-	catch (const SQL_Error::BaseError &e)
+	catch (const Error_SQL::BaseError &e)
 	{
 		DispatchError(e);
 	}

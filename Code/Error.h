@@ -2,14 +2,14 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-namespace SQL_Error
+namespace Error_SQL
 {
 	/************************************************************************
 	*
 	*   接口类
 	*
 	*************************************************************************/
-	extern std::fstream log_file;
+	extern std::fstream Log_file;
 	class BaseError
 	{
 	public:
@@ -21,7 +21,7 @@ namespace SQL_Error
 
 	};
 	// 错误处理函数
-	void DispatchError(const SQL_Error::BaseError &error);
+	void DispatchError(const Error_SQL::BaseError &error);
 
 
 	/************************************************************************

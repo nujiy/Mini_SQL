@@ -2,9 +2,9 @@
 #include "Color.h"
 #include <vector>
 
-namespace SQL_Error
+namespace Error_SQL
 {
-	static std::fstream log_file;
+	static std::fstream Log_file;
 
 	void BaseError::PrintError() const
 	{
@@ -15,9 +15,9 @@ namespace SQL_Error
 	void BaseError::WriteToLog() const
 	{
 		// 写入日志
-		log_file.open("log.txt", std::ios::out | std::ios::app);
-		log_file << ErrorInfo << std::endl;
-		log_file.close();
+		Log_file.open("log.txt", std::ios::out | std::ios::app);
+		Log_file << ErrorInfo << std::endl;
+		Log_file.close();
 	}
 
 	CMD_FORMAT_ERROR::CMD_FORMAT_ERROR(const std::string s)
@@ -31,64 +31,64 @@ namespace SQL_Error
 		// 输出异常
 		std::cout << RED << error_info << ErrorInfo << RESET;
 	}
-	void SQL_Error::TABLE_ERROR::PrintError() const
+	void Error_SQL::TABLE_ERROR::PrintError() const
 	{
 		std::cout << RED << error_info << ErrorInfo<< RESET;
 	}
 
 }
 
-void SQL_Error::DispatchError(const BaseError &error)
+void Error_SQL::DispatchError(const BaseError &error)
 {
 	error.PrintError();
 	error.WriteToLog();
 }
 
 
-SQL_Error::LSEEK_ERROR::LSEEK_ERROR()
+Error_SQL::LSEEK_ERROR::LSEEK_ERROR()
 {
 	ErrorInfo = "(LSEEK_FAILED) The file handle is invalid or the value for origin is invalid "
 		"or the position the position specified by offset is before the beginning of the file.";
 }
 
 
-SQL_Error::READ_ERROR::READ_ERROR()
+Error_SQL::READ_ERROR::READ_ERROR()
 {
 	ErrorInfo = "(READ_FAILED) Illegal page number (less than zero).";
 }
 
 
-SQL_Error::WRITE_ERROR::WRITE_ERROR()
+Error_SQL::WRITE_ERROR::WRITE_ERROR()
 {
 	ErrorInfo = "(WRITE_FAILED) The file handle is invalid or the file is not opened for writing "
 		"or there is not enough space left on the device for the operation.";
 }
 
 
-SQL_Error::FILENAME_CONVERT_ERROR::FILENAME_CONVERT_ERROR()
+Error_SQL::FILENAME_CONVERT_ERROR::FILENAME_CONVERT_ERROR()
 {
 	ErrorInfo = "(FILENAME_CONVERT_FAILED) File name convert failed";
 }
 
 
-SQL_Error::KEY_INSERT_ERROR::KEY_INSERT_ERROR()
+Error_SQL::KEY_INSERT_ERROR::KEY_INSERT_ERROR()
 {
 	ErrorInfo = "(KEY_INSERT_FAILED) Key Word Insert Failed! The record that to inset has been excisted!";
 }
 
 
-SQL_Error::BPLUSTREE_DEGREE_TOOBIG_ERROR::BPLUSTREE_DEGREE_TOOBIG_ERROR()
+Error_SQL::BPLUSTREE_DEGREE_TOOBIG_ERROR::BPLUSTREE_DEGREE_TOOBIG_ERROR()
 {
 	ErrorInfo = "(BPLUSTREE_DEGREE_TOOBIG) A page of file can not contain a tree node!";
 }
 
 
-SQL_Error::KeyAttr_NameLength_ERROR::KeyAttr_NameLength_ERROR()
+Error_SQL::KeyAttr_NameLength_ERROR::KeyAttr_NameLength_ERROR()
 {
 	ErrorInfo = "(BPLUSTREE_DEGREE_TOOBIG) KeyAttr name length flowover,it may be happen in where you set the record's key!";
 }
 
-SQL_Error::TABLE_ERROR::TABLE_ERROR(const std::string s /*= std::string("")*/)
+Error_SQL::TABLE_ERROR::TABLE_ERROR(const std::string s /*= std::string("")*/)
 {
 	ErrorInfo = "Table Operator Error!";
 	error_info = s;

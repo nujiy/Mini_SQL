@@ -25,7 +25,6 @@ struct SelectPrintInfo
 {
 	std::string table_name;
 	std::vector<std::string> name_selected_column;
-
 	std::vector<std::pair<KeyAttr, FileAddr>> key_fd;  // keys 和 fds 保存着对应的关键字以及该关键字对应的记录地址
 
 };

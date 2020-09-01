@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <iterator>
 
-CompareCell CreateCmpCell(std::string column_name, Column_Type column_type, Operator_Type Optype, std::string value)
+CompareCell CreateCmpCell(std::string column_name, Column_Type column_type, Operat_Type Optype, std::string value)
 {
 
 	Column_Cell column_cell;
@@ -448,14 +448,14 @@ bool InsertRecord(TB_Insert_Info tb_insert_info, std::string path /*= std::strin
 		auto is_fd = tree.Search(key_tmp);
 		if (is_fd != FileAddr{ 0,0 })
 		{
-			SQL_Error::KEY_INSERT_ERROR e;
+			Error_SQL::KEY_INSERT_ERROR e;
 			throw e;
 		}
 
 	}
-	catch (const SQL_Error::BaseError e)
+	catch (const Error_SQL::BaseError e)
 	{
-		SQL_Error::DispatchError(e);
+		Error_SQL::DispatchError(e);
 		return false;
 	}
 
@@ -808,36 +808,36 @@ void PrintRecord(std::string table_name, KeyAttr key, FileAddr fd, std::string p
 	std::cout << rd << std::endl;
 }
 
-Operator_Type GetOperatorType(std::string s)
+Operat_Type GetOperatorType(std::string s)
 {
 	s = StrToLower(s);
 	if (s == ">")
 	{
-		return Operator_Type::B;
+		return Operat_Type::B;
 	}
 	else if (s == ">=")
 	{
-		return Operator_Type::BE;
+		return Operat_Type::BE;
 	}
 	else if (s == "<")
 	{
-		return Operator_Type::L;
+		return Operat_Type::L;
 	}
 	else if (s == "<=")
 	{
-		return Operator_Type::LE;
+		return Operat_Type::LE;
 	}
 	else if (s == "=")
 	{
-		return Operator_Type::E;
+		return Operat_Type::E;
 	}
 	else if (s == "!=")
 	{
-		return Operator_Type::NE;
+		return Operat_Type::NE;
 	}
 	else
 	{
-		return Operator_Type::B;
+		return Operat_Type::B;
 	}
 }
 
@@ -944,7 +944,7 @@ std::vector<std::pair<KeyAttr, FileAddr>> KeySearch(CompareCell compare_cell, st
 	auto phead = tree.GetPtrIndexHeadNode();
 
 	// 如果是查找相等的值
-	if (compare_cell.OperType == Operator_Type::E)
+	if (compare_cell.OperType == Operat_Type::E)
 	{
 		FileAddr fd = tree.Search(compare_cell.cmp_value);
 		if (fd.offSet != 0)

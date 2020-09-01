@@ -7,7 +7,7 @@ std::string IdxToDbf(std::string idx_name)
 	int i = idx_name.size() - 1;
 	while (idx_name[i] != '.')
 		i--;
-	if (i < 0) throw SQL_Error::FILENAME_CONVERT_ERROR();
+	if (i < 0) throw Error_SQL::FILENAME_CONVERT_ERROR();
 	idx_name[i + 1] = 'd';
 	idx_name[i + 2] = 'b';
 	idx_name[i + 3] = 'f';
@@ -23,7 +23,7 @@ std::string DbfToIdx(std::string dbf_name)
 	int i = idx_name.size() - 1;
 	while (idx_name[i] != '.')
 		i--;
-	if (i < 0) throw SQL_Error::FILENAME_CONVERT_ERROR();
+	if (i < 0) throw Error_SQL::FILENAME_CONVERT_ERROR();
 	idx_name[i + 1] = 'i';
 	idx_name[i + 2] = 'd';
 	idx_name[i + 3] = 'x';

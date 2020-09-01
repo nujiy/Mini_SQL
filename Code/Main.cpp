@@ -66,15 +66,15 @@ void RunMiniSQL()
 
 			Interpreter(senstr.GetSensefulStr(), cmd_type, print_window);
 		}
-		catch (SQL_Error::BaseError &e)
+		catch (Error_SQL::BaseError &e)
 		{
-			SQL_Error::DispatchError(e);
+			Error_SQL::DispatchError(e);
 			cout << endl;
 			continue;
 		}
 		catch (...)
 		{
-			
+			cout << RED << "Unkown Error." << RESET << endl;
 		}
 	
 }
