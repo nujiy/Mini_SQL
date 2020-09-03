@@ -15,7 +15,7 @@ namespace Error_SQL
 	void BaseError::WriteToLog() const
 	{
 		// –¥»Î»’÷æ
-		Log_file.open("log.txt", std::ios::out | std::ios::app);
+		Log_file.open("Log.txt", std::ios::out | std::ios::app);
 		Log_file << ErrorInfo << std::endl;
 		Log_file.close();
 	}
