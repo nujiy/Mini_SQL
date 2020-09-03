@@ -4,12 +4,16 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+
 #include "API.h"
 
-// 打印命令行窗口，使底层实现和GUI分离，便于扩展
 #define PRINTLENGTH 63
+
 class PrintWindow
 {
+
+	void Print(int len, std::string s); // 打印 |xxxx        | 其中竖线内长度为 len
+	int GetColumnLength(std::string name, std::vector<std::string> col_name, std::vector<int> col_len);
 public:
 	void CreateTable(bool is_created);
 	void ShowAllTable(std::vector<std::string> sen_str, std::string path);
@@ -22,9 +26,6 @@ public:
 	void UseDB(bool isUsed);
 	void UpdateTable(bool isUpdated);
 	void DeleteTable(bool isDeleted);
-private:
-	void Print(int len, std::string s); // 打印 |xxxx        | 其中竖线内长度为 len
-	int GetColumnLength(std::string name, std::vector<std::string> col_name, std::vector<int> col_len);
 
 };
 
