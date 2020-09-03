@@ -48,14 +48,14 @@ void InitMiniSQL()
 
 void RunMiniSQL()
 {
-	Meaning_String senstr;
+	Meaning_String Meaningstr;
 	PrintWindow print_window;
-	while (1)
+	while (true)
 		try
 		{
-			std::string cmd = GetCommand();
-			senstr.SetSrcStr(cmd);
-			auto cmd_type = GetOpType(senstr.GetSensefulStr());
+			string cmd = GetCommand();
+			Meaningstr.SetSrcStr(cmd);
+			auto cmd_type = GetOpType(Meaningstr.GetSensefulStr());
 
 			if (cmd_type == CmdType::QUIT)break;
 			if (cmd_type == CmdType::HELP)
@@ -64,7 +64,7 @@ void RunMiniSQL()
 				continue;
 			}
 
-			Interpreter(senstr.GetSensefulStr(), cmd_type, print_window);
+			Interpreter(Meaningstr.GetSensefulStr(), cmd_type, print_window);
 		}
 		catch (Error_SQL::BaseError &e)
 		{
@@ -144,30 +144,30 @@ void sleep_(unsigned int n)
 /*
 void TestFunc()
 {
-	Meaning_String senstr;
+	Meaning_String Meaningstr;
 	PrintWindow print_window;
 	std::default_random_engine e(time(NULL));
 	std::uniform_real_distribution<double> d(0, 1000);
 	std::uniform_int_distribution<int> u(1, 29);
 
 	// 创建并使用数据库
-	senstr.SetSrcStr("drop database STU;");
-	auto cmd_type = GetOpType(senstr.GetSensefulStr());
-	Interpreter(senstr.GetSensefulStr(), cmd_type, print_window);
+	Meaningstr.SetSrcStr("drop database STU;");
+	auto cmd_type = GetOpType(Meaningstr.GetSensefulStr());
+	Interpreter(Meaningstr.GetSensefulStr(), cmd_type, print_window);
 
 
-	senstr.SetSrcStr("create database STU;");
-	cmd_type = GetOpType(senstr.GetSensefulStr());
-	Interpreter(senstr.GetSensefulStr(), cmd_type, print_window);
+	Meaningstr.SetSrcStr("create database STU;");
+	cmd_type = GetOpType(Meaningstr.GetSensefulStr());
+	Interpreter(Meaningstr.GetSensefulStr(), cmd_type, print_window);
 
-	senstr.SetSrcStr("use database STU;");
-	cmd_type = GetOpType(senstr.GetSensefulStr());
-	Interpreter(senstr.GetSensefulStr(), cmd_type, print_window);
+	Meaningstr.SetSrcStr("use database STU;");
+	cmd_type = GetOpType(Meaningstr.GetSensefulStr());
+	Interpreter(Meaningstr.GetSensefulStr(), cmd_type, print_window);
 
 	// 创建表
-	senstr.SetSrcStr("create table stu(id int, score double, name char(30);");
-	cmd_type = GetOpType(senstr.GetSensefulStr());
-	Interpreter(senstr.GetSensefulStr(), cmd_type, print_window);
+	Meaningstr.SetSrcStr("create table stu(id int, score double, name char(30);");
+	cmd_type = GetOpType(Meaningstr.GetSensefulStr());
+	Interpreter(Meaningstr.GetSensefulStr(), cmd_type, print_window);
 
 	//插入数据
 	std::ofstream out;
@@ -199,9 +199,9 @@ void TestFunc()
 
 		out << std::string(cmd_str.begin() + 38, cmd_str.end()) << std::endl;
 
-		senstr.SetSrcStr(cmd_str);
-		cmd_type = GetOpType(senstr.GetSensefulStr());
-		Interpreter(senstr.GetSensefulStr(), cmd_type, print_window);
+		Meaningstr.SetSrcStr(cmd_str);
+		cmd_type = GetOpType(Meaningstr.GetSensefulStr());
+		Interpreter(Meaningstr.GetSensefulStr(), cmd_type, print_window);
 	}
 	out.close();
 }
