@@ -29,7 +29,7 @@ public:
 
 };
 
-// 主程序的交互接口 输入：命令参数和GUI类 调用APILIB
+// 主程序的交互接口 输入：命令参数和GUI类 调用API
 void Interpreter(std::vector<std::string> sen_str, CmdType cmd_type, PrintWindow print_window);
 
 
