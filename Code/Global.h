@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include "Error.h"
 
-//#define NDEBUG
+
 using namespace std::chrono;
 
 
