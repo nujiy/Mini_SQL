@@ -45,21 +45,21 @@ BTree::BTree(std::string idx_name)
 	file_id = GetGlobalFileBuffer()[idx_name.c_str()]->fileId;
 }
 
-FileAddr BTree::DeleteKeyAtInnerNode(FileAddr x, int i, KeyAttr key)
+FileAddr BTree::Delete_InnerNode(FileAddr x, int i, KeyAttr key)
 {
 	auto px = FileAddrToMemPtr(x);
 	auto py = FileAddrToMemPtr(px->children[i]);
 	FileAddr fd_res;
 	if (py->node_type == NodeType::LEAF)
 	{
-		fd_res = DeleteKeyAtLeafNode(x, i, key);
+		fd_res = Delete_LeafNode(x, i, key);
 	}
 	else
 	{
 		int j = py->count_valid_key - 1;
 		while (py->key[j] > key)j--;
 		assert(j >= 0);
-		fd_res = DeleteKeyAtInnerNode(px->children[i], j, key);
+		fd_res = Delete_InnerNode(px->children[i], j, key);
 	}
 
 	// 判断删除后的结点个数
@@ -173,7 +173,7 @@ FileAddr BTree::DeleteKeyAtInnerNode(FileAddr x, int i, KeyAttr key)
 }
 
 // 假设待删除的关键字已经存在
-FileAddr BTree::DeleteKeyAtLeafNode(FileAddr x, int i, KeyAttr key)
+FileAddr BTree::Delete_LeafNode(FileAddr x, int i, KeyAttr key)
 {
 	auto px = FileAddrToMemPtr(x);
 	auto py = FileAddrToMemPtr(px->children[i]);
@@ -200,7 +200,7 @@ FileAddr BTree::DeleteKeyAtLeafNode(FileAddr x, int i, KeyAttr key)
 }
 
 // 在一个非满结点 x, 插入关键字 k, k的数据地址为 k_fd
-void BTree::InsertNotFull(FileAddr x, KeyAttr k, FileAddr k_fd)
+void BTree::Insert_NotFull(FileAddr x, KeyAttr k, FileAddr k_fd)
 {
 	auto px = FileAddrToMemPtr(x);
 	int i = px->count_valid_key - 1;
@@ -237,7 +237,7 @@ void BTree::InsertNotFull(FileAddr x, KeyAttr k, FileAddr k_fd)
 			if (k >= px->key[i + 1])
 				i += 1;
 		}
-		InsertNotFull(px->children[i], k, k_fd);
+		Insert_NotFull(px->children[i], k, k_fd);
 	}
 }
 
@@ -302,11 +302,11 @@ FileAddr BTree::Search(KeyAttr search_key, FileAddr node_fd)
 
 	if (pNode->node_type == NodeType::LEAF || pNode->node_type == NodeType::ROOT)
 	{
-		return SearchLeafNode(search_key, node_fd);
+		return Search_LeafNode(search_key, node_fd);
 	}
 	else
 	{
-		return SearchInnerNode(search_key, node_fd);
+		return Search_InnerNode(search_key, node_fd);
 	}
 }
 
@@ -350,11 +350,11 @@ bool BTree::Insert(KeyAttr k, FileAddr k_fd)
 
 		// 先分裂再插入
 		SplitChild(s_fd, 0, s.children[0]);
-		InsertNotFull(s_fd, k, k_fd);
+		Insert_NotFull(s_fd, k, k_fd);
 	}
 	else
 	{
-		InsertNotFull(root_fd, k, k_fd);
+		Insert_NotFull(root_fd, k, k_fd);
 	}
 	return true;
 }
@@ -404,7 +404,7 @@ FileAddr BTree::Delete(KeyAttr key)
 	//auto px = FileAddrToMemPtr(root_fd);
 	//auto py = FileAddrToMemPtr(px->children[i]);
 
-	auto fd_delete = DeleteKeyAtInnerNode(root_fd, i, key);
+	auto fd_delete = Delete_InnerNode(root_fd, i, key);
 
 
 	if (proot->count_valid_key == 1)
@@ -496,7 +496,7 @@ IndexHeadNode * BTree::GetPtrIndexHeadNode()
 	return phead;
 }
 
-FileAddr BTree::SearchInnerNode(KeyAttr search_key, FileAddr node_fd)
+FileAddr BTree::Search_InnerNode(KeyAttr search_key, FileAddr node_fd)
 {
 	FileAddr fd_res{ 0,0 };
 
@@ -518,14 +518,14 @@ FileAddr BTree::SearchInnerNode(KeyAttr search_key, FileAddr node_fd)
 	{
 		BTNode* pNextNode = FileAddrToMemPtr(fd_res);
 		if (pNextNode->node_type == NodeType::LEAF)
-			return SearchLeafNode(search_key, fd_res);
+			return Search_LeafNode(search_key, fd_res);
 		else
-			return SearchInnerNode(search_key, fd_res);
+			return Search_InnerNode(search_key, fd_res);
 	}
 	//return fd_res;
 }
 
-FileAddr BTree::SearchLeafNode(KeyAttr search_key, FileAddr node_fd)
+FileAddr BTree::Search_LeafNode(KeyAttr search_key, FileAddr node_fd)
 {
 
 	BTNode* pNode = FileAddrToMemPtr(node_fd);

@@ -5,7 +5,7 @@
 #include <queue>
 
 
-// 索引文件头信息结点,保存在文件头预留空间
+// 索引文件头信息
 class IndexHeadNode
 {
 public:
@@ -51,13 +51,13 @@ public:
 	BTNode *FileAddrToMemPtr(FileAddr node_fd);                                 // 文件地址转换为内存指针
 
 private:
-	FileAddr DeleteKeyAtInnerNode(FileAddr x, int i, KeyAttr key);              // x的下标为i的结点为叶子结点
-	FileAddr DeleteKeyAtLeafNode(FileAddr x, int i, KeyAttr key);               // x的下标为i的结点为叶子结点
-	void InsertNotFull(FileAddr x, KeyAttr k, FileAddr k_fd);
+	FileAddr Delete_InnerNode(FileAddr x, int i, KeyAttr key);              // x的下标为i的结点为叶子结点
+	FileAddr Delete_LeafNode(FileAddr x, int i, KeyAttr key);               // x的下标为i的结点为叶子结点
+	void Insert_NotFull(FileAddr x, KeyAttr k, FileAddr k_fd);
 	void SplitChild(FileAddr x, int i, FileAddr y);                             // 分裂x的孩子结点x.children[i] , y
 	FileAddr Search(KeyAttr search_key, FileAddr node_fd);                      // 判断关键字是否存在
-	FileAddr SearchInnerNode(KeyAttr search_key, FileAddr node_fd);             // 在内部节点查找
-	FileAddr SearchLeafNode(KeyAttr search_key, FileAddr node_fd);              // 在叶子结点查找
+	FileAddr Search_InnerNode(KeyAttr search_key, FileAddr node_fd);             // 在内部节点查找
+	FileAddr Search_LeafNode(KeyAttr search_key, FileAddr node_fd);              // 在叶子结点查找
 
 
 private:
